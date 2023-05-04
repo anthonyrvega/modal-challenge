@@ -1,0 +1,112 @@
+.order-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.1);
+  
+}
+
+.shop-link {
+  margin-bottom: 90px;
+}
+
+.listing-details {
+  display: flex;
+  align-items: center;
+}
+
+.image-container {
+  margin-right: 30px;
+  padding-right: 20px;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.padding {
+  height: 10px;
+}
+
+.accept-button {
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.reject-button {
+  padding: 10px 20px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+button {
+  background-color: white;
+  color: white;
+  border: 2px solid red;
+  padding: 10px;
+}
+
+button:hover {
+  background-color: red;
+  color: white;
+  cursor: pointer;
+}
+
+button.accept:hover {
+  background-color: green;
+  color: white;
+}
+
+button.reject:hover {
+  cursor: pointer;
+}
+
+/* Add the following styles to the dialog element */
+/* modify the dialog element */
+dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* modify the content of the dialog */
+.action-modal {
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* add a close button */
+.action-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: #aaa;
+  cursor: pointer;
+}
