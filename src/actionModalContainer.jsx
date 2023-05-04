@@ -7,23 +7,26 @@ const ActionModalContainer = () => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    fetch("https://eb863a74-7a4e-4daf-9540-d2db8470c18e.mock.pstmn.io/marketplace/orders/123")
-      .then(response => response.json())
-      .then(data => setOrder(data))
-      .catch(error => console.log(error));
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://eb863a74-7a4e-4daf-9540-d2db8470c18e.mock.pstmn.io/marketplace/orders/123");
+        const data = await response.json();
+        setOrder(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
   }, []);
-
-  const handleModalShow = () => {
-    setShowModal(true);
+  
+  const handleModal = (isOpen) => {
+    setShowModal(isOpen);
   }
-
-  const handleModalClose = () => {
-    setShowModal(false);
-  }
-
+  
   if (!order) {
     return <div>Loading...</div>;
   }
+  
 
   return (
     <>
@@ -42,8 +45,8 @@ const ActionModalContainer = () => {
   <h2>{order.listing.manufactureYear} {order.listing.model.brand.name} {order.listing.model.name}</h2>
   <p>Description: {order.listing.model.description}</p>
   <div className="action-buttons" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px' }}>
-  <button className="accept" onClick={handleModalShow} style={{ fontSize: '18px', padding: '12px 24px' }}>Accept Sale</button>
-  <button className="reject" onClick={handleModalShow} style={{ fontSize: '18px', padding: '12px 24px' }}>Reject Sale</button>
+  <button className="accept" onClick={() => handleModal(true)} style={{ fontSize: '18px', padding: '12px 24px' }}>Accept Sale</button>
+  <button className="reject" onClick={() => handleModal(true)} style={{ fontSize: '18px', padding: '12px 24px' }}>Reject Sale</button>
 </div>
 
 </div>
@@ -51,8 +54,8 @@ const ActionModalContainer = () => {
         </div>
       </div>
       {showModal ? (
-  <dialog open={showModal} onClose={handleModalClose}>
-    <ActionModal order={order} show={showModal} onClose={handleModalClose} />
+  <dialog open={showModal} onClose={() => handleModal(false)}>
+    <ActionModal order={order} show={showModal} onClose={() => handleModal(false)} />
   </dialog>
 ) : null}
     </>

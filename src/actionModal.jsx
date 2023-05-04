@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const ActionModal = ({ order, showModal, onClose }) => {
   const [accepted, setAccepted] = useState(false); // track whether the sale is accepted
 
-  const handleAccept = () => {
+  const handleAccept = async () => {
     const data = {
       id: order.id,
       listing: {
@@ -11,24 +11,22 @@ const ActionModal = ({ order, showModal, onClose }) => {
       },
       accepted: true
     };
-    fetch("https://eb863a74-7a4e-4daf-9540-d2db8470c18e.mock.pstmn.io/marketplace/orders/123/accept", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => {
-        console.log("Accept sale response", response);
-        setAccepted(true); // update state to indicate the sale is accepted
-      })
-      .catch(error => {
-        console.error("Accept sale error", error);
-        
+    try {
+      const response = await fetch("https://eb863a74-7a4e-4daf-9540-d2db8470c18e.mock.pstmn.io/marketplace/orders/123/accept", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
       });
+      console.log("Accept sale response", response);
+      setAccepted(true); // update state to indicate the sale is accepted
+    } catch (error) {
+      console.error("Accept sale error", error);
+    }
   };
-
-  const handleReject = () => {
+  
+  const handleReject = async () => {
     const data = {
       id: order.id,
       listing: {
@@ -36,23 +34,22 @@ const ActionModal = ({ order, showModal, onClose }) => {
       },
       accepted: false
     };
-    fetch("https://eb863a74-7a4e-4daf-9540-d2db8470c18e.mock.pstmn.io/marketplace/orders/123/decline", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => {
-        console.log("Reject sale response", response);
-        onClose();
-      })
-      .catch(error => {
-        console.error("Reject sale error", error);
-        onClose();
+    try {
+      const response = await fetch("https://eb863a74-7a4e-4daf-9540-d2db8470c18e.mock.pstmn.io/marketplace/orders/123/decline", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
       });
+      console.log("Reject sale response", response);
+      onClose();
+    } catch (error) {
+      console.error("Reject sale error", error);
+      onClose();
+    }
   };
-
+  
   return (
     <dialog className="modal" open={showModal} onClose={onClose}>
   <div className="action-buttons" style={{ display: 'flex', justifyContent: 'flex-end' }}>
