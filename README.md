@@ -1,3 +1,5 @@
+Thanks Abineet for the challenge!
+
 ## Getting Started
 
 To get started with this project, follow these steps:
@@ -20,9 +22,6 @@ You will also see any lint errors in the console.
 ### `npm test`
 
 Launches the test runner to run the `vitest` test suite.
-
-
-Thanks Abineet!
 
 
 
