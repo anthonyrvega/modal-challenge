@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import "./App.css"; // import the CSS file
-
+//define actionModal 
 const ActionModal = ({ order, showModal, onClose }) => {
-  const [accepted, setAccepted] = useState(false); // track whether the sale is accepted
-
+   // track whether the sale is accepted 
+  const [accepted, setAccepted] = useState(false); 
+  // Define async function to handle accepting a sale
   const handleAccept = async () => {
+    // Create an object with data for the POST request
     const data = {
       id: order.id,
       listing: {
@@ -13,6 +15,7 @@ const ActionModal = ({ order, showModal, onClose }) => {
       accepted: true
     };
     try {
+        //Send the POST request to accept the sale
       const response = await fetch("https://eb863a74-7a4e-4daf-9540-d2db8470c18e.mock.pstmn.io/marketplace/orders/123/accept", {
         method: "POST",
         body: JSON.stringify(data),
@@ -21,14 +24,16 @@ const ActionModal = ({ order, showModal, onClose }) => {
         }
       });
       console.log("Accept sale response", response);
-      setAccepted(true); // update state to indicate the sale is accepted
+      // Update  state variable to indicate sale is accepted
+      setAccepted(true); 
     } catch (error) {
       console.error("Accept sale error", error);
     }
   };
-  
+  // Define an async function to handle rejecting a sale
   const handleReject = async () => {
     const data = {
+         //Send the POST request to accept the sale
       id: order.id,
       listing: {
         id: order.listing.id
@@ -44,6 +49,7 @@ const ActionModal = ({ order, showModal, onClose }) => {
         }
       });
       console.log("Reject sale response", response);
+       // Call  onClose function to close  modal
       onClose();
     } catch (error) {
       console.error("Reject sale error", error);

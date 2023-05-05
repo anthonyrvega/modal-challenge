@@ -2,15 +2,20 @@ import React, { useState, useEffect } from "react";
 import "./App.css"; 
 import ActionModal from "./ActionModal.jsx";
 
+//Define the ActionModalContainer functional component.
 const ActionModalContainer = () => {
+    //useState hook to define the order and showModal state variables
   const [order, setOrder] = useState(null);
   const [showModal, setShowModal] = useState(false);
-
+  //useEffect to fetch data from an API endpoint when the component mounts:
   useEffect(() => {
+    //fetchData async func
     const fetchData = async () => {
       try {
+        //GET request to the API endpoint 
         const response = await fetch("https://eb863a74-7a4e-4daf-9540-d2db8470c18e.mock.pstmn.io/marketplace/orders/123");
         const data = await response.json();
+        //set the order state variable to the resulting data
         setOrder(data);
       } catch (error) {
         console.log(error);
@@ -18,7 +23,7 @@ const ActionModalContainer = () => {
     };
     fetchData();
   }, []);
-  
+  //Define handleModal function
   const handleModal = (isOpen) => {
     setShowModal(isOpen);
   }
